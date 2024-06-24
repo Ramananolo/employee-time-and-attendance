@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+
+import static employee.attendance.employeeTimeAndAttendance.entity.enums.ListCategory.Janitor;
+import static employee.attendance.employeeTimeAndAttendance.entity.enums.ListCategory.normal;
+
 @Getter
 @Setter
 public class CalendarOfJune {
@@ -27,5 +31,13 @@ public class CalendarOfJune {
         this.ironDay.add(date17);
         this.ironDay.add(date26);
         this.ironDay.add(date25);
+    }
+
+    public int displayWorkingDayPerWeek(Employee employee) {
+        var categoryNameOfEmployee = employee.getCategory().getNom();
+        int numberDay = this.numberDayOfWorkingPerWeek;
+        if (categoryNameOfEmployee.equals(normal)) return numberDay - 2;
+        else if (categoryNameOfEmployee.equals(Janitor)) return numberDay;
+        return numberDay;
     }
 }
