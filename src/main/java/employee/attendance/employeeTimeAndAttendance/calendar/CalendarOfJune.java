@@ -1,5 +1,6 @@
 package employee.attendance.employeeTimeAndAttendance.calendar;
 
+import employee.attendance.employeeTimeAndAttendance.entity.Category;
 import employee.attendance.employeeTimeAndAttendance.entity.Employee;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,8 +19,8 @@ import static employee.attendance.employeeTimeAndAttendance.entity.enums.ListCat
 @Setter
 public class CalendarOfJune {
     private final Calendar calendarJune = new GregorianCalendar(2024, Calendar.JUNE, 06);
-    private final Calendar calendarOfMay = new GregorianCalendar(2024,Calendar.MAY,01);
-    private final  Calendar calendarOfJuly = new GregorianCalendar(2024,Calendar.JUNE,06);
+    private final Calendar calendarOfMay = new GregorianCalendar(2024, Calendar.MAY, 01);
+    private final Calendar calendarOfJuly = new GregorianCalendar(2024, Calendar.JUNE, 06);
     public List<Calendar> ironDay;
     int numberDayOfWorkingPerWeek = Calendar.DAY_OF_WEEK;
     Employee employee;
@@ -47,14 +48,13 @@ public class CalendarOfJune {
 
     public double hourOfWorkForMouth(Employee employee) {
         var categoryOfEmployee = employee.getCategory().getNom();
-        double hourForOneWeek = employee.getCategory().getHourNormalByDay()*7;
+        double hourForOneWeek = employee.getCategory().getHourNormalByDay() * 7;
         var workingCondition = employee.getCategory().getWorkingConditions();
         double hourInMonth = hourForOneWeek * 6;
         if (categoryOfEmployee.equals(Janitor)) {
-            if (workingCondition.equals(night)) return (hourInMonth * 1.3) * 4;
+            if (workingCondition.equals(night)) return hourInMonth;
             if (workingCondition.equals(day)) return hourInMonth;
-        }
-        else if (categoryOfEmployee.equals(normal)) return hourInMonth;
+        } else if (categoryOfEmployee.equals(normal)) return hourInMonth;
         return hourInMonth;
     }
 }
