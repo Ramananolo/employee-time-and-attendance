@@ -4,6 +4,7 @@ import employee.attendance.employeeTimeAndAttendance.calendar.CalendarOfJune;
 import employee.attendance.employeeTimeAndAttendance.entity.Category;
 import employee.attendance.employeeTimeAndAttendance.entity.Employee;
 import employee.attendance.employeeTimeAndAttendance.entity.Salary;
+import employee.attendance.employeeTimeAndAttendance.entity.Work;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -41,9 +42,8 @@ class EmployeeTimeAndAttendanceApplicationTests {
 	void day_of_working_for_employee(){
 		var categoryJanitor = new Category(Janitor,56,110000,0,null);
 		var salaryOfJanitor = new Salary(110000*4);
-		var employee1 = new Employee("RAKOTO","MN00401", LocalDate.of(1999,01,04), LocalDate.of(2022,04,01),null,categoryJanitor);
+		var employee1 = new Employee("RAKOTO","MN00401", LocalDate.of(1999,01,04), LocalDate.of(2022,04,01),null,categoryJanitor,salaryOfJanitor);
 		var calendarOfJune = new CalendarOfJune();
-		var calendarJune = calendarOfJune.getCalendarJune();
 		int workingDayPerWeek = calendarOfJune.displayWorkingDayPerWeek(employee1);
 		assertEquals(7,workingDayPerWeek);
 	}
@@ -51,7 +51,8 @@ class EmployeeTimeAndAttendanceApplicationTests {
 	@Test
 	void hours_worked_by_rakoto_for_this_calendar(){
 		var categoryRakoto = new Category(Janitor,10,100000,0,day);
-		var employeeRakoto = new  Employee("RAKOTO","MN00401", LocalDate.of(1999,01,04), LocalDate.of(2022,04,01),null,categoryRakoto);
+		var salaryOfJanitorRakoto = new Salary(100000*6);
+		var employeeRakoto = new  Employee("RAKOTO","MN00401", LocalDate.of(1999,01,04), LocalDate.of(2022,04,01),null,categoryRakoto,salaryOfJanitorRakoto);
 		var calendarOfJune = new CalendarOfJune();
 		double hourWorkedByRakoto = calendarOfJune.hourOfWorkForMouth(employeeRakoto);
 
@@ -61,9 +62,33 @@ class EmployeeTimeAndAttendanceApplicationTests {
 	@Test
 	void hours_worked_by_rabe_for_this_calendar(){
 		var categoryRabe = new Category(Janitor,14,100000,0,night);
-		var employeeRabe =  new  Employee("RABE","MN00402", LocalDate.of(1999,01,04), LocalDate.of(2022,04,01),null, categoryRabe);
+		var salaryOfJanitorRabe = new Salary(100000*6);
+		var employeeRabe =  new  Employee("RABE","MN00402", LocalDate.of(1999,01,04), LocalDate.of(2022,04,01),null,categoryRabe,salaryOfJanitorRabe);
 		var calendarOfJune = new CalendarOfJune();
 		double hourWorkedByRabe =  calendarOfJune.hourOfWorkForMouth(employeeRabe);
 		assertEquals(588,hourWorkedByRabe);
+	}
+
+	@Test
+	void amount_to_be_paid_to_rakoto_rabe(){
+		var calendarOfJune = new CalendarOfJune();
+		// RABE
+		var categoryJanitor = new Category(Janitor,14,100000,0,night);
+		var salaryOfJanitor = new Salary(110000*4);
+		var employeeRabe = new Employee("RABE","MN00401", LocalDate.of(1999,01,04), LocalDate.of(2022,04,01),null,categoryJanitor,salaryOfJanitor);
+		var work = new Work(14*7*6,calendarOfJune,night,employeeRabe);
+		double salaryOfRabe = work.sumOfSalaryWithInMouthOfJune(employeeRabe);
+		assertEquals(780000,salaryOfRabe);
+	}
+@Test
+	void amount_to_be_paid_to_rakoto_rakoto(){
+		var calendarOfJune = new CalendarOfJune();
+		// RAKOTO
+		var categoryJanitor = new Category(Janitor,10,100000,0,day);
+		var salaryOfJanitor = new Salary(110000*4);
+		var employeeRabe = new Employee("RAKOTO","MN00401", LocalDate.of(1999,01,04), LocalDate.of(2022,04,01),null,categoryJanitor,salaryOfJanitor);
+		var work = new Work(14*7*6,calendarOfJune,day,employeeRabe);
+		double salaryOfRabe = work.sumOfSalaryWithInMouthOfJune(employeeRabe);
+		assertEquals(600000,salaryOfRabe);
 	}
 }
