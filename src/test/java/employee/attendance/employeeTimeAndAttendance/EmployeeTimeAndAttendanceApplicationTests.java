@@ -1,13 +1,18 @@
 package employee.attendance.employeeTimeAndAttendance;
 
 import employee.attendance.employeeTimeAndAttendance.calendar.CalendarOfJune;
+import employee.attendance.employeeTimeAndAttendance.entity.Category;
+import employee.attendance.employeeTimeAndAttendance.entity.Employee;
+import employee.attendance.employeeTimeAndAttendance.entity.Salary;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static employee.attendance.employeeTimeAndAttendance.entity.enums.ListCategory.Janitor;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -30,4 +35,14 @@ class EmployeeTimeAndAttendanceApplicationTests {
 		assertEquals(ironDay,calendarOfJune.ironDay);
 	}
 
+	@Test
+	void day_of_working_for_employee(){
+		var categoryJanitor = new Category(Janitor,56,110000,0,null);
+		var salaryOfJanitor = new Salary(110000*4);
+		var employee1 = new Employee("RAKOTO","MN00401", LocalDate.of(1999,01,04), LocalDate.of(2022,04,01),null,categoryJanitor);
+		var calendarOfJune = new CalendarOfJune();
+		var calendarJune = calendarOfJune.getCalendarJune();
+		int workingDayPerWeek = calendarOfJune.displayWorkingDayPerWeek(employee1);
+		assertEquals(7,workingDayPerWeek);
+	}
 }
