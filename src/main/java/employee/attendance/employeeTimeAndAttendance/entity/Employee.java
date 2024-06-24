@@ -13,4 +13,5 @@ public class Employee {
     public LocalDate HiringDate;
     public LocalDate ContractEndDate;
     public Category category;
+    public Salary salaryAmount;
 }
