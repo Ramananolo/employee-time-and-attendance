@@ -49,12 +49,21 @@ class EmployeeTimeAndAttendanceApplicationTests {
 	}
 
 	@Test
-	void hours_worked_by_rakoto_for_the_month_of_June(){
+	void hours_worked_by_rakoto_for_this_calendar(){
 		var categoryRakoto = new Category(Janitor,10,100000,0,day);
 		var employeeRakoto = new  Employee("RAKOTO","MN00401", LocalDate.of(1999,01,04), LocalDate.of(2022,04,01),null,categoryRakoto);
 		var calendarOfJune = new CalendarOfJune();
 		double hourWorkedByRakoto = calendarOfJune.hourOfWorkForMouth(employeeRakoto);
 
 		assertEquals(420,hourWorkedByRakoto);
+	}
+
+	@Test
+	void hours_worked_by_rabe_for_this_calendar(){
+		var categoryRabe = new Category(Janitor,14,100000,0,night);
+		var employeeRabe =  new  Employee("RABE","MN00402", LocalDate.of(1999,01,04), LocalDate.of(2022,04,01),null, categoryRabe);
+		var calendarOfJune = new CalendarOfJune();
+		double hourWorkedByRabe =  calendarOfJune.hourOfWorkForMouth(employeeRabe);
+		assertEquals(588,hourWorkedByRabe);
 	}
 }
