@@ -9,7 +9,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class Category {
     private final ListCategory nom;
-    private int hourNormalByWeek;
+    private int hourNormalByDay;
     private double salaryPerWeek;
     private double indemnity;
     private ConditionOfWorking workingConditions;
