@@ -4,8 +4,10 @@ import employee.attendance.employeeTimeAndAttendance.entity.enums.ConditionOfWor
 import employee.attendance.employeeTimeAndAttendance.entity.enums.ListCategory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 @AllArgsConstructor
 public class Category {
     private final ListCategory nom;
