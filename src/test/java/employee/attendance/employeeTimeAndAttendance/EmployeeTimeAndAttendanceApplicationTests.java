@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static employee.attendance.employeeTimeAndAttendance.entity.enums.ConditionOfWorking.day;
+import static employee.attendance.employeeTimeAndAttendance.entity.enums.ConditionOfWorking.night;
 import static employee.attendance.employeeTimeAndAttendance.entity.enums.ListCategory.Janitor;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -44,5 +46,15 @@ class EmployeeTimeAndAttendanceApplicationTests {
 		var calendarJune = calendarOfJune.getCalendarJune();
 		int workingDayPerWeek = calendarOfJune.displayWorkingDayPerWeek(employee1);
 		assertEquals(7,workingDayPerWeek);
+	}
+
+	@Test
+	void hours_worked_by_rakoto_for_the_month_of_June(){
+		var categoryRakoto = new Category(Janitor,10,100000,0,day);
+		var employeeRakoto = new  Employee("RAKOTO","MN00401", LocalDate.of(1999,01,04), LocalDate.of(2022,04,01),null,categoryRakoto);
+		var calendarOfJune = new CalendarOfJune();
+		double hourWorkedByRakoto = calendarOfJune.hourOfWorkForMouth(employeeRakoto);
+
+		assertEquals(420,hourWorkedByRakoto);
 	}
 }
