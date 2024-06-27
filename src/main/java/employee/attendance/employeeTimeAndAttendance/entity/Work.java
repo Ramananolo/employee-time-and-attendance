@@ -19,7 +19,7 @@ public class Work {
     public double hourOfWork;
     CalendarOfJune calendarOfJune;
     private final ConditionOfWorking conditionOfWorking;
-    private List<Calendar> dayOfWorking;
+    private List<Calendar> ironDayOfWorking;
     Employee employee;
 
     public Work() {
@@ -68,7 +68,7 @@ public class Work {
         double salaryWithIronDay = 0.0;
         double salaryFor39days = (employee.getCategory().getSalaryPerWeek() / 7) * 39;
         double salaryFor3days = (employee.getCategory().getSalaryPerWeek() / 7) * 3;
-        if (dayOfWorking.equals(getCalendarOfJune().getIronDay()))
+        if (ironDayOfWorking.equals(getCalendarOfJune().getIronDay()))
             if (this.conditionOfWorking.equals(night)) {
                 salaryFor39days = salaryFor39days * 1.3;
                 salaryFor3days = salaryFor3days * 1.3;
